@@ -1,6 +1,8 @@
-# Expenses
+# Tapsy
 
-Fast expense tracker with Cashew-style screens: type the amount, tap a category, done.
+**Two taps and it's saved.** An expense tracker with Cashew-style screens: type the amount, tap a category, done.
+
+Use it: https://tulsyanprateek.github.io/tapsy/ (on Android: Chrome menu > Add to Home screen).
 
 Open `index.html` in a browser, or host the folder over https so a phone can install it
 (Chrome menu > Add to Home screen). Everything works offline; data stays on the device.

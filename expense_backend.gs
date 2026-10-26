@@ -1,5 +1,6 @@
 /**
- * Expenses: sync backend (Google Apps Script, bound to your own Google Sheet).
+ * Tapsy: sync backend (Google Apps Script, bound to your own Google Sheet).
+ * (Replies carry app: 'expenses', the fixed id the app checks; it predates the Tapsy name.)
  *
  * Setup (once):
  *   1. New Google Sheet -> Extensions -> Apps Script -> paste this whole file -> Save.

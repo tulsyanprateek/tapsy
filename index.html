@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#F7F7FB">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Expenses</title>
+<title>Tapsy</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icons/icon-192.png">
 <script>
@@ -694,7 +694,7 @@ const V = {view:"home", per:{mode:"month", key:curMonth()}, q:"", searching:fals
 $("bnav").innerHTML = ["home","txns","budgets","more"].map(v =>
   `<button class="bn" data-a="go" data-v="${v}" data-nav="${v}"><span class="pill">${ic(VIEWS[v].icon)}</span><span>${VIEWS[v].name}</span></button>`).join("");
 document.querySelector(".fab").innerHTML = ic("plus");
-$("side").innerHTML = `<div class="side-b"><img src="./icons/icon-192.png" alt="">Expenses</div>
+$("side").innerHTML = `<div class="side-b"><img src="./icons/icon-192.png" alt="">Tapsy</div>
   <button class="xfab" data-a="add">${ic("plus")}Add transaction</button>` +
   ["home","txns","budgets","reports"].map(v => `<button class="sn" data-a="go" data-v="${v}" data-nav="${v}">${ic(VIEWS[v].icon)}${VIEWS[v].name}</button>`).join("") +
   `<div class="side-g">Manage</div>` +
@@ -730,7 +730,7 @@ function show(v){
   V.view = v;
   const navKey = VIEWS[v].parent && !matchMedia("(min-width:960px)").matches ? VIEWS[v].parent : v;
   document.querySelectorAll("[data-nav]").forEach(b => b.classList.toggle("on", b.dataset.nav === navKey || (b.dataset.nav === v)));
-  document.title = VIEWS[v].name + " · Expenses";
+  document.title = VIEWS[v].name + " · Tapsy";
   render();
 }
 window.addEventListener("hashchange", () => {
@@ -1817,7 +1817,7 @@ const ACT = {
     say("Checking the sheet…");
     try {
       const r = await (await fetch(url, {method:"POST", body:JSON.stringify({action:"ping", key:k})})).json();
-      if (!r || r.app !== "expenses") return say("That URL answered, but it isn't the expenses script.", "bad");
+      if (!r || r.app !== "expenses") return say("That URL answered, but it isn't the Tapsy sync script.", "bad");   // "expenses" = the script's fixed id
       if (!r.ok) return say(esc(r.error || "The sheet said no."), "bad");
     } catch(e){ return say("Couldn't reach that URL. Check it, and that the deployment's access is set to Anyone.", "bad"); }
     const fresh = !Sync.cfg || Sync.cfg.url !== url;
@@ -1833,13 +1833,14 @@ const ACT = {
   },
   syncOff:async () => { if (!await ask("Stop syncing this device? Transactions stay here and in the sheet.", "Turn off")) return;
     Sync.cfg = null; LS.del("xp_sync"); render(); },
-  exportJson:() => download("expenses-backup-" + today() + ".json", JSON.stringify({app:"expenses", v:1, at:new Date().toISOString(), recs:[...R.values()]}), "application/json"),
+  // app:"expenses" is the backup format's fixed id (kept from before the Tapsy name, so older backups still restore)
+  exportJson:() => download("tapsy-backup-" + today() + ".json", JSON.stringify({app:"expenses", v:1, at:new Date().toISOString(), recs:[...R.values()]}), "application/json"),
   exportCsv:() => {
     const q = s => '"' + String(s == null ? "" : s).replace(/"/g, '""') + '"';
     const rows = [["Date","Type","Amount","Category","Subcategory","Account","To account","Note","More notes","Kind"]].concat(txns().map(t =>
       [t.date, {exp:"Expense", inc:"Income", trf:"Transfer"}[t.type], t.amt, t.type === "trf" ? "" : nameOf(t.cat), t.sub ? nameOf(t.sub) : "",
        nameOf(t.acc), t.type === "trf" ? nameOf(t.to) : "", t.note || "", t.memo || "", XT[t.xt] || ""]));
-    download("expenses-" + today() + ".csv", "﻿" + rows.map(r => r.map(q).join(",")).join("\r\n"), "text/csv");
+    download("tapsy-" + today() + ".csv", "﻿" + rows.map(r => r.map(q).join(",")).join("\r\n"), "text/csv");
   },
   importJson:() => {
     const inp = document.createElement("input"); inp.type = "file"; inp.accept = ".json,application/json";

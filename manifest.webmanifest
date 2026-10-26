@@ -1,7 +1,7 @@
 {
-  "name": "Expenses",
-  "short_name": "Expenses",
-  "description": "Fast expense tracker: amount, category, done.",
+  "name": "Tapsy",
+  "short_name": "Tapsy",
+  "description": "Expense tracker where two taps save it: amount, category, done.",
   "start_url": "./#home",
   "scope": "./",
   "display": "standalone",

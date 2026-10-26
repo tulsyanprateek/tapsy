@@ -1,6 +1,8 @@
-# Expenses (expense_tracker)
+# Tapsy
 
-Personal expense tracker, working name "Expenses". Started 26 Oct 2026.
+Personal expense tracker named **Tapsy** ("two taps": amount, category, saved). Started 26 Oct 2026 as "Expenses";
+renamed the same day. Internal ids keep the old name on purpose, so data written before the rename still works:
+IndexedDB `xp`, localStorage `xp_*`, backup/sheet format id `app: "expenses"`.
 The owner uses Cashew (Android) and likes its features and reports, but entry takes too many taps.
 Goal: Cashew's look and reports, with much faster entry. A Play Store release may come later.
 
@@ -21,7 +23,7 @@ sync URLs or keys. Data lives on each device (IndexedDB) and in the user's own G
 
 Run locally: any static server in this folder, e.g. `py -m http.server 3470` (service worker needs http(s), not file://).
 
-**Live:** https://tulsyanprateek.github.io/expenses/ (GitHub Pages from `main`, root; repo tulsyanprateek/expenses).
+**Live:** https://tulsyanprateek.github.io/tapsy/ (GitHub Pages from `main`, root; repo tulsyanprateek/tapsy).
 Publishing = commit + push to `main`; Pages redeploys in a minute or two. The page itself is fetched network-first,
 so phones get a new `index.html` on the next open. Fonts, icons and `vendor/` are served from the cache:
 bump `CACHE` in `sw.js` whenever one of those files changes.

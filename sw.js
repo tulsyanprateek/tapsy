@@ -1,7 +1,7 @@
 // Offline support once the app is served over https (or localhost).
 // The page itself: network first, so a new version shows as soon as you're online; the saved copy when offline.
 // Fonts and icons: from the cache. Calls to Google (sync) are never touched.
-const CACHE = 'expenses-v3';
+const CACHE = 'tapsy-v4';
 const FILES = [
   './', './index.html', './manifest.webmanifest',
   './fonts/outfit.woff2', './fonts/hanken-grotesk.woff2',
