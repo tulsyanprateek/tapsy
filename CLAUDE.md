@@ -25,7 +25,9 @@ Run locally: any static server in this folder, e.g. `py -m http.server 3470` (se
 
 **Live:** https://tulsyanprateek.github.io/tapsy/ (GitHub Pages from `main`, root; repo tulsyanprateek/tapsy).
 Publishing = commit + push to `main`; Pages redeploys in a minute or two. The page itself is fetched network-first,
-so phones get a new `index.html` on the next open. Fonts, icons and `vendor/` are served from the cache:
+so phones get a new `index.html` on the next open, but `sw.js` waits at most 3 s (`PAGE_WAIT_MS`) when a saved copy
+exists and the late answer still refreshes the cache. Tested 26 Oct 2026 with a server delaying the page 8 s: opened in
+3.0 s from the saved copy, cache refreshed in the background. Fonts, icons and `vendor/` are served from the cache:
 bump `CACHE` in `sw.js` whenever one of those files changes.
 
 ## Fast entry (the point of the app)
