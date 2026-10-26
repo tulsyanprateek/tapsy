@@ -21,6 +21,11 @@ sync URLs or keys. Data lives on each device (IndexedDB) and in the user's own G
 
 Run locally: any static server in this folder, e.g. `py -m http.server 3470` (service worker needs http(s), not file://).
 
+**Live:** https://tulsyanprateek.github.io/expenses/ (GitHub Pages from `main`, root; repo tulsyanprateek/expenses).
+Publishing = commit + push to `main`; Pages redeploys in a minute or two. The page itself is fetched network-first,
+so phones get a new `index.html` on the next open. Fonts, icons and `vendor/` are served from the cache:
+bump `CACHE` in `sw.js` whenever one of those files changes.
+
 ## Fast entry (the point of the app)
 
 New transaction = type the amount on the built-in keypad, tap a category, and it's saved (2 taps).
