@@ -1,0 +1,7 @@
+# Public repo: app code only. Never commit money data, Cashew backups or app backups.
+*.sql
+*.sqlite
+*.db
+*.csv
+expenses-backup-*.json
+_test/
